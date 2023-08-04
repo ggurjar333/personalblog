@@ -4,229 +4,66 @@ date: "2023-08-01T22:12:03.284Z"
 description: "Quick guide to PySpark and things to keep in mind."
 ---
 
-On this Wikipedia, here's a great quote. 
+## What are the features of **PySpark**?
 
-I'm sure I'll write a lot more interesting things in the future.
+PySpark, in the context of data engineering, is a robust tool that supports Spark's core functionalities including Spark SQL, DataFrame manipulation, Streaming, and Machine Learning capabilities.
 
-How exciting! This is my first post on my new fake blog!
 
-[salted duck eggs](https://en.wikipedia.org/wiki/Salted_duck_egg).
 
-> A salted duck egg is a Chinese preserved food product made by soaking duck
-> eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-> supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-> charcoal paste. The eggs may also be sold with the salted paste removed,
-> wrapped in plastic, and vacuum packed. From the salt curing process, the
-> salted duck eggs have a briny aroma, a gelatin-like egg white and a
-> firm-textured, round yolk that is bright orange-red in color.
+### Spark SQL and DataFrame
+Spark SQL structures the data in the form of DataFrames while processing in PySpark. A DataFrame is a distributed collection of data organized into named columns, which provides a programming abstraction for structured data. This allows Spark to run computations on large scale data in a distributed manner.
 
-![Chinese Salty Egg](./salty_egg.jpg)
+### MLib (aka Machine Learning library)
+MLlib is a scalable machine learning library in Spark, offering high-level APIs for creating and optimizing machine learning pipelines, ideal for processing large-scale data.
 
-You can also write code blocks here!
+MLlib differs from other machine learning libraries in its scalability and compatibility with Spark's distributed computing model. It's designed to perform machine learning algorithms on large datasets across multiple nodes, without the need for data sampling or other approximations. It also integrates seamlessly with other Spark components like Spark SQL and Datasets, making it easier to build end-to-end data pipelines. Additionally, it provides high-level APIs for common machine learning tasks, making it more user-friendly than some low-level libraries.
 
-```js
-const saltyDuckEgg = "chinese preserved food product"
-```
+### Spark Core
+Spark Core is the fundamental, general execution engine for the Spark platform. All other functionalities in Spark are built on top of it. It provides Resilient Distributed Datasets (RDDs) and in-memory computing capabilities. RDD is a fundamental data structure of Spark that is an immutable distributed collection of objects, which can be processed in parallel. In-memory computing capabilities mean that Spark can store data in RAM instead of disk which makes the data processing much faster.
 
-| Number | Title                                    | Year |
-| :----- | :--------------------------------------- | ---: |
-| 1      | Harry Potter and the Philosopher’s Stone | 2001 |
-| 2      | Harry Potter and the Chamber of Secrets  | 2002 |
-| 3      | Harry Potter and the Prisoner of Azkaban | 2004 |
-
-[View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
-
-This is a paragraph.
-
-    This is a paragraph.
-
-# Header 1
-
-## Header 2
-
-    Header 1
-    ========
-
-    Header 2
-    --------
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-#### Header 4
-
-##### Header 5
-
-###### Header 6
-
-    # Header 1
-    ## Header 2
-    ### Header 3
-    #### Header 4
-    ##### Header 5
-    ###### Header 6
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-#### Header 4
-
-##### Header 5
-
-###### Header 6
-
-    # Header 1 #
-    ## Header 2 ##
-    ### Header 3 ###
-    #### Header 4 ####
-    ##### Header 5 #####
-    ###### Header 6 ######
-
-> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-    > Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-
-> ## This is a header.
+> ## How to memorize these?
 >
-> 1. This is the first list item.
-> 2. This is the second list item.
->
-> Here's some example code:
->
->     Markdown.generate();
+> 1. Start with Spark Core as the base layer. This is the fundamental execution engine where all other functionalities are built on. It provides RDDs and in-memory computing capabilities.
+> 2. The next layer could be Spark SQL and DataFrame. This module processes structured data using DataFrames, which are distributed collections of data organized into named columns.
+> 3. The top layer could be MLib. This is the machine learning library in Spark that offers high-level APIs for creating machine learning pipelines.
 
-    > ## This is a header.
-    > 1. This is the first list item.
-    > 2. This is the second list item.
-    >
-    > Here's some example code:
-    >
-    >     Markdown.generate();
 
-- Red
-- Green
-- Blue
 
-* Red
-* Green
-* Blue
 
-- Red
-- Green
-- Blue
+## How to create a dataframe in PySpark?
+Learning PySpark after knowing pandas would be moderately easy as both use DataFrames. However, the key difference is PySpark's distributed computing, which might require understanding new concepts. Practice and patience would be needed to master it.
 
-```markdown
-- Red
-- Green
-- Blue
+In PySpark, a DataFrame can be created using the pyspark.sql.SparkSession.createDataFrame method. This method can take various inputs like a list of lists, tuples, dictionaries, pyspark.sql.Rows, a pandas DataFrame, or an RDD consisting of such a list. The 'schema' argument can be used to specify the DataFrame's schema. If it's not provided, PySpark will infer the schema by sampling the data.
 
-* Red
-* Green
-* Blue
+Firstly, you can create a PySpark DataFrame from a list of rows
 
-- Red
-- Green
-- Blue
+```python
+## create a spark session
+from pyspark.sql import SparkSession
+
+
+from datetime import datetime, date
+import pandas as pd
+from pyspark.sql import Row
+
+spark = SparkSession.builder.getOrCreate()
+df = spark.createDataFrame([
+    Row(
+        customer_name="Gaurav",
+        order_amt=150,
+        order_date=date(2023, 8, 1), order_delivery_time=datetime(2023, 8, 3, 10, 0)
+    ),
+    Row(
+        customer_name="John",
+        order_amt=180,
+        order_date=date(2023, 8, 1),
+        order_delivery_date=datetime(2023, 8, 4, 8, 0)
+    ),
+    Row(
+        customer_name="Abdul",
+        order_amt=150,
+        order_date=date(2023, 7, 29),
+        order_delivery_date=datetime(2023, 8, 2, 8, 0)
+    )
+])
 ```
-
-- `code goes` here in this line
-- **bold** goes here
-
-```markdown
-- `code goes` here in this line
-- **bold** goes here
-```
-
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-
-```markdown
-1. Buy flour and salt
-1. Mix together with water
-1. Bake
-```
-
-1. `code goes` here in this line
-1. **bold** goes here
-
-```markdown
-1. `code goes` here in this line
-1. **bold** goes here
-```
-
-Paragraph:
-
-    Code
-
-<!-- -->
-
-    Paragraph:
-
-        Code
-
----
-
----
-
----
-
----
-
----
-
-    * * *
-
-    ***
-
-    *****
-
-    - - -
-
-    ---------------------------------------
-
-This is [an example](http://example.com "Example") link.
-
-[This link](http://example.com) has no title attr.
-
-This is [an example][id] reference-style link.
-
-[id]: http://example.com "Optional Title"
-
-    This is [an example](http://example.com "Example") link.
-
-    [This link](http://example.com) has no title attr.
-
-    This is [an example] [id] reference-style link.
-
-    [id]: http://example.com "Optional Title"
-
-_single asterisks_
-
-_single underscores_
-
-**double asterisks**
-
-**double underscores**
-
-    *single asterisks*
-
-    _single underscores_
-
-    **double asterisks**
-
-    __double underscores__
-
-This paragraph has some `code` in it.
-
-    This paragraph has some `code` in it.
-
-![Alt Text](https://via.placeholder.com/200x50 "Image Title")
-
-    ![Alt Text](https://via.placeholder.com/200x50 "Image Title")
