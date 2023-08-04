@@ -33,7 +33,7 @@ Spark Core is the fundamental, general execution engine for the Spark platform. 
 ## How to create a dataframe in PySpark?
 Learning PySpark after knowing pandas would be moderately easy as both use DataFrames. However, the key difference is PySpark's distributed computing, which might require understanding new concepts. Practice and patience would be needed to master it.
 
-In PySpark, a DataFrame can be created using the pyspark.sql.SparkSession.createDataFrame method. This method can take various inputs like a list of lists, tuples, dictionaries, pyspark.sql.Rows, a pandas DataFrame, or an RDD consisting of such a list. The 'schema' argument can be used to specify the DataFrame's schema. If it's not provided, PySpark will infer the schema by sampling the data.
+In PySpark, a DataFrame can be created using the `pyspark.sql.SparkSession.createDataFrame` method. This method can take various inputs like a list of lists, tuples, dictionaries, pyspark.sql.Rows, a pandas DataFrame, or an RDD consisting of such a list. The 'schema' argument can be used to specify the DataFrame's schema. If it's not provided, PySpark will infer the schema by sampling the data.
 
 Firstly, you can create a PySpark DataFrame from a list of rows
 
