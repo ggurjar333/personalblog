@@ -1,6 +1,6 @@
 ---
 title: Dagster
-date: "2023-08-03 T22:40:32.169Z"
+date: "2023-08-03T22:40:32.169Z"
 description: A data orchestration tool that you should be aware of.
 ---
 
