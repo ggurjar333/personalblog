@@ -1,11 +1,13 @@
 ---
 title: Dagster
-date: "2015-05-28T22:40:32.169Z"
-description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
+date: "2023-08-03 T22:40:32.169Z"
+description: A data orchestration tool that you should be aware of.
 ---
 
+### Why do you need Dagster?
+If you are looking for good UI to see beautiful data pipelines, machine learning pipelines and easy-to-configure kind of tool for data pipelining. This is one of the best you can try out.
 
-# Study Notes: Software-defined assets
+### Software-defined assets
 
 - an object in a persistent storage such as a table, file, or persisted machine learning model.
 - it is a Dagster object that couples an asset to the function and upstream assets used to produce its contents.
