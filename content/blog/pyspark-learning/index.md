@@ -1,7 +1,7 @@
 ---
-title: PySpark Learning
+title: PySpark
 date: "2023-08-01T22:12:03.284Z"
-description: "PySpark Learning"
+description: "Quick guide to PySpark and things to keep in mind."
 ---
 
 On this Wikipedia, here's a great quote. 
