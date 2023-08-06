@@ -97,5 +97,3 @@ def latest_cities_by_business_dna(cities):
 def another_latest_cities_by_business_dna(cities):
     return cities + ['Surat', 'Pune']
 ```
-
-Let's learn more with [**External asset dependencies**](004-external-asset-dependencies.md)
